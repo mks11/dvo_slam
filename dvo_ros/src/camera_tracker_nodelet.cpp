@@ -28,6 +28,7 @@ namespace dvo_ros
 
 CameraTrackerNodelet::CameraTrackerNodelet()
 {
+  
 }
 
 CameraTrackerNodelet::~CameraTrackerNodelet()

@@ -1,0 +1,1 @@
+  <cpp cflags="`rosboost-cfg --cflags` -I${prefix}/include" lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ldvo_core -ldvo_visualization"/> 

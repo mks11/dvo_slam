@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <name> dvo_slam </name>
+  <description> dvo_slam </description>
+  <version> 0.0.0 </version>
+  <author>Christian Kerl</author>
+  <maintainer email="ruser@todo.todo"> ruser </maintainer>
+  <license>GPL</license>
+  <url>http://ros.org/wiki/dvo_slam</url>
+  
+  <buildtool_depend> catkin </buildtool_depend>
+  
+  <build_depend> roscpp </build_depend>
+  <build_depend> g2o </build_depend>
+  <build_depend> dynamic_reconfigure </build_depend>
+  <build_depend> std_msgs </build_depend>
+  <build_depend> sensor_msgs </build_depend>
+  <build_depend> image_transport </build_depend>
+  <build_depend> message_filters </build_depend>
+  <build_depend> cv_bridge"</build_depend>
+  
+ 
+  <build_depend> dvo_core </build_depend>
+  <build_depend> dvo_ros </build_depend>
+
+  <build_depend> visualization_msgs </build_depend>
+  <build_depend> interactive_markers</build_depend>
+  
+  <build_depend> eigen </build_depend>
+  <build_depend> tbb </build_depend>
+  <build_depend> message_generation </build_depend>
+ 
+
+  <run_depend> roscpp </run_depend>
+ 
+  <run_depend> message_runtime </run_depend>
+  <run_depend> g2o </run_depend>
+  <run_depend> dynamic_reconfigure </run_depend>
+  <run_depend> std_msgs</run_depend>
+  <run_depend> sensor_msgs </run_depend>
+  <run_depend> image_transport </run_depend>
+  <run_depend> message_filters </run_depend>
+  <run_depend> cv_bridge"</run_depend>
+  
+  <run_depend> dvo_core </run_depend>
+  <run_depend> dvo_ros </run_depend>
+
+  <run_depend> visualization_msgs </run_depend>
+  <run_depend> interactive_markers</run_depend>
+
+
+  <run_depend> eigen </run_depend>
+  <run_depend> tbb </run_depend>
+  
+  <export>
+      <cpp cflags="-I${prefix}/include -I${prefix}/cfg/cpp"
+        lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ldvo_slam"/>
+  </export>
+</package>
+
+

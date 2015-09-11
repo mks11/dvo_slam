@@ -202,6 +202,7 @@ public:
 
   // SSE version
   void warpIntensitySse(const AffineTransform& transformation, const PointCloud& reference_pointcloud, const IntrinsicMatrix& intrinsics, RgbdImage& result, PointCloud& transformed_pointcloud);
+
   // SSE version without warped pointcloud
   void warpIntensitySse(const AffineTransform& transformation, const PointCloud& reference_pointcloud, const IntrinsicMatrix& intrinsics, RgbdImage& result);
 

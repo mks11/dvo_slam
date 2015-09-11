@@ -1,0 +1,30 @@
+<package>
+  <name> dvo_benchmark </name>
+  <description> dvo_benchmark </description>
+  <version> 0.0.0 </version>
+  <author>Christian Kerl</author>
+  <maintainer email = "ruser@todo.todo"> ruser </maintainer>
+  <license>GPL</license>
+
+  <url>http://ros.org/wiki/dvo_benchmark</url>
+  <buildtool_depend> catkin </buildtool_depend>
+
+  <build_depend> roscpp </build_depend>
+  <build_depend> dvo_core </build_depend>
+  <build_depend> dvo_ros </build_depend>
+  <build_depend> dvo_slam </build_depend>
+  <build_depend> pcl_ros </build_depend>
+  <build_depend> common_rosdeps </build_depend>
+  <build_depend> eigen </build_depend>
+
+  <run_depend> roscpp </run_depend>
+  <run_depend> dvo_core </run_depend>
+  <run_depend> dvo_ros </run_depend>
+  <run_depend> dvo_slam </run_depend>
+  <run_depend> pcl_ros </run_depend>
+  <run_depend> common_rosdeps </run_depend>
+  <run_depend> eigen </run_depend>
+
+</package>
+
+

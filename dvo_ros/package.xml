@@ -1,0 +1,70 @@
+<package>
+  <name> dvo_ros </name>
+  <description> dvo_ros  </description>
+  <version> 0.0.0 </version>
+  <author>Christian Kerl</author>
+  <maintainer email="ruser@todo.todo">ruser</maintainer>
+  <license>GPL</license>
+  
+  <url>http://ros.org/wiki/dvo_ros</url>
+
+  <buildtool_depend> catkin </buildtool_depend>
+
+  <build_depend> roscpp </build_depend>
+  <build_depend> nodelet</build_depend>
+ 
+  <build_depend> tf </build_depend>
+  <build_depend>tf_conversions</build_depend>
+  <build_depend> eigen_conversions</build_depend>
+  <build_depend> dynamic_reconfigure</build_depend>
+  <build_depend> pcl_ros</build_depend>
+  
+  <build_depend> dvo_core</build_depend>
+ 
+  <build_depend> sensor_msgs</build_depend>
+  <build_depend> image_transport</build_depend>
+  <build_depend> message_filters</build_depend>
+  <build_depend>cv_bridge</build_depend>
+  
+  <build_depend> visualization_msgs</build_depend>
+  <build_depend> interactive_markers</build_depend>
+  <build_depend> eigen </build_depend>
+  <build_depend> common_rosdeps </build_depend>
+  
+  <!--
+      
+      commented out because hydro doesn't have the package "common_rosdeps" yet
+     <depend package="common_rosdeps" />
+     <rosdep name="eigen" />
+     
+  --> 
+
+  <run_depend> roscpp </run_depend>
+  <run_depend> nodelet</run_depend>
+  <run_depend> dynamic_reconfigure</run_depend>
+  <run_depend> pcl_ros</run_depend>
+  
+  <run_depend> dvo_core</run_depend>
+ 
+  <run_depend> sensor_msgs</run_depend>
+  <run_depend> image_transport</run_depend>
+  <run_depend> message_filters</run_depend>
+  <run_depend>cv_bridge</run_depend>
+  
+  <run_depend> visualization_msgs</run_depend>
+  <run_depend> interactive_markers</run_depend>
+  <run_depend> tf</run_depend>
+  <run_depend>tf_conversions</run_depend>
+  <run_depend> eigen </run_depend>
+  <run_depend> eigen_conversions</run_depend>
+
+  
+  <export>
+      <nodelet plugin="${prefix}/nodelet_plugins.xml" />
+      <cpp cflags="-I${prefix}/include -I${prefix}/cfg/cpp"
+	   lflags="-Wl,-rpath,${prefix}/lib -L${prefix}/lib -ldvo_ros"/>
+  </export>
+
+</package>
+
+

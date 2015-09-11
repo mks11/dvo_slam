@@ -1,15 +1,6 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
+cmake_minimum_required(VERSION 2.8.3)
+project(dvo_ros)
 
-# Set the build type.  Options are:
-#  Coverage       : w/ debug symbols, w/o optimization, w/ code-coverage
-#  Debug          : w/ debug symbols, w/o optimization
-#  Release        : w/o debug symbols, w/ optimization
-#  RelWithDebInfo : w/ debug symbols, w/ optimization
-#  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
-#set(ROS_BUILD_TYPE RelWithDebInfo)
-
-rosbuild_init()
 
 #set the default path for built executables to the "bin" directory
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
@@ -29,30 +20,107 @@ set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 find_package(Eigen REQUIRED)
 include_directories(${Eigen_INCLUDE_DIRS})
 
-# dynamic reconfigure
-rosbuild_find_ros_package(dynamic_reconfigure)
-include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
-gencfg()
+##
+find_package(catkin REQUIRED COMPONENTS 
+dynamic_reconfigure 
+roscpp 
+dvo_core 
+nodelet
+interactive_markers
+visualization_msgs
+cv_bridge
+tf
+tf_conversions
+eigen
+eigen_conversions
+image_transport
+geometry_msgs
+message_generation
+message_runtime
 
-rosbuild_add_library(${PROJECT_NAME} 
+#tf2
+#tf2_ros
+#tf2_kdl
+#tf2_msgs
+#tf2_tools
+#tf2_geometry_msgs
+#tf2_bullet
+)
+
+# dynamic reconfigure
+###include(${dynamic_reconfigure_PACKAGE_PATH}/cmake/cfgbuild.cmake)
+
+#pcl library
+find_package(PCL REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+
+# opencv
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+
+###gencfg()
+generate_dynamic_reconfigure_options(
+cfg/dvo.cfg
+)
+
+catkin_package(CATKIN_DEPENDS roscpp tf
+  DEPENDS Boost tf 
+  INCLUDE_DIRS include
+)
+
+##
+include_directories(${PROJECT_SOURCE_DIR}/../dvo_core/include
+  ${PROJECT_SOURCE_DIR}/include)
+
+##MESSAGE(STATUS "project src dir: " dvo_core/include)
+
+add_library(${PROJECT_NAME} 
     src/camera_base.cpp
     src/camera_dense_tracking.cpp
     
     src/visualization/ros_camera_trajectory_visualizer.cpp
 )
 
-rosbuild_add_library(camera_tracker_nodelet
-    src/camera_tracker_nodelet.cpp
+add_library(camera_tracker_nodelet
+  src/camera_tracker_nodelet.cpp
 )
 
 target_link_libraries(camera_tracker_nodelet
-    ${PROJECT_NAME}
+    #${PROJECT_NAME}
+    ${catkin_LIBRARIES}
+    
 )
 
-rosbuild_add_executable(camera_tracker
+add_executable(camera_tracker
      src/camera_tracker_node.cpp
 )
 
+###############  For debug purpose #####################
+
+##MESSAGE(STATUS "pcl..libs: " ${PCL_VISUALIZATION_LIBRARIES})
+##MESSAGE(STATUS "opencv ..." ${OpenCV_LIBS})
+##MESSAGE(STATUS "opencv .." ${OpenCV_INCLUDE_DIRS})
+
+########################################################
 target_link_libraries(camera_tracker
-    ${PROJECT_NAME}
+  ${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+  dvo_core
+  dvo_ros
+  dvo_visualization
+  # camera_tracker_nodelet
+    opencv_core
+  ${OpenCV_LIBS}
+  ${PCl_COMMON_LIBRARIES}
+  ${PCl_IO_LIBRARIES}
+  ${PCL_VISUALIZATION_LIBRARIES}
+  ${PCL_FILTERS_LIBRARIES}
+  ${Boost_LIBS}
+  # ${tf_LIBS}
 )
+
+#MESSAGE(STATUS "tf-libs" ${tf_LIBS})

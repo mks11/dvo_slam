@@ -152,7 +152,7 @@ void CameraKeyframeTracker::handleTrackerConfig(dvo_ros::CameraDenseTrackerConfi
       camera->build(tracker_cfg.getNumLevels());
     }
 
-    //ROS_INFO_STREAM("reconfigured tracker, config ( " << tracker_cfg << " )");
+    ROS_INFO("reconfigured tracker, config ( " << tracker_cfg << " )");
   }
 
   vis_->reset();
@@ -176,7 +176,7 @@ void CameraKeyframeTracker::handleSlamConfig(dvo_slam::KeyframeSlamConfig& confi
     }
   }
 
-  //ROS_INFO_STREAM("reconfigured SLAM system, frontend config ( " << keyframe_tracker_cfg << " ), backend config  ( " << graph_cfg << " )");
+  // ROS_INFO_STREAM("reconfigured SLAM system, frontend config ( " << keyframe_tracker_cfg << " ), backend config  ( " << graph_cfg << " )");
 }
 
 
@@ -284,6 +284,7 @@ void CameraKeyframeTracker::handleImages(
       update(current->level(0), accumulated_transform).
       show(dvo::visualization::CameraVisualizer::ShowCamera);
 
+  
   publishTransform(h, accumulated_transform, "base_link_estimate");
 
   sw_callback.stopAndPrint();
@@ -298,9 +299,11 @@ void CameraKeyframeTracker::publishTransform(const std_msgs::Header& header, con
   tf_transform.child_frame_id_ = frame;
   tf_transform.stamp_ = header.stamp;
 
-  tf::TransformEigenToTF(transform, tf_transform);
+  tf::transformEigenToTF(transform, tf_transform);
 
   tb.sendTransform(tf_transform);
+  
+  ROS_INFO_STREAM("DEBUG purpose- CameeraKeyframeTracker::publishTransform......");
 
   geometry_msgs::PoseWithCovarianceStamped pose_msg;
 

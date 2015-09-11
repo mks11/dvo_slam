@@ -45,6 +45,7 @@ class KeyframeTracker::Impl
   ros::Publisher ll_keyframe_pub_, ll_odometry_pub_, cn_odometry_pub_, cn_keyframe_pub_, de_odometry_pub_, de_keyframe_pub_, md_pub_;
 
   dvo_slam::visualization::GraphVisualizer* visualizer_;
+
 public:
   friend class ::dvo_slam::KeyframeTracker;
 
